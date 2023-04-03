@@ -5,6 +5,7 @@ Module creates the Rectangle class
 """
 
 class Rectangle:
+
     """
     Class Rectangle with validated private instance attributes width and height
     """
@@ -15,7 +16,6 @@ class Rectangle:
             width: width of rectangle horizontal dimention
             height: height of rectangle vertical dimention
         """
-        
         self.width = width
         self.height = height
 
