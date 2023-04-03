@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-
 """
 Module creates the Rectangle class
 """
 
-class Rectangle:
 
+class Rectangle:
     """
     Class Rectangle with validated private instance attributes width and height
     """
@@ -13,8 +12,8 @@ class Rectangle:
     def __init__(self, width=0, height=0):
         """Instantiates width and height using property setter
         Args:
-            width: width of rectangle horizontal dimention
-            height: height of rectangle vertical dimention
+            width: width of rectangle
+            height: height of rectangle
         """
         self.width = width
         self.height = height
@@ -22,7 +21,7 @@ class Rectangle:
     @property
     def width(self):
         """width: width of rectangle
-        value is an integer >= 0
+        setter validates value is an integer >= 0
         Parameter:
             value: value of the width
         Raises:
@@ -42,7 +41,7 @@ class Rectangle:
     @property
     def height(self):
         """height: height of rectangle
-        value is an integer >= 0
+        setter validates value is an integer >= 0
         Parameter:
             value: value of the height
         Raises:
