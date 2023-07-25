@@ -1,45 +1,24 @@
 #!/usr/bin/node
+// Computes the number of tasks completed by user id from
+// jsonplaceholder.typicode.com API
 
 const request = require('request');
+const url = process.argv[2];
 
-const apiUrl = process.argv[2];
-
-if (!apiUrl) {
-  console.log('Usage: node 6-completed_tasks.js <API_URL>');
-  process.exit(1);
-}
-
-request(apiUrl, (error, response, body) => {
-  if (error) {
-    console.error('Error while fetching data:', error);
-    process.exit(1);
+request(url, function (err, res, body) {
+  if (err) {
+    console.log(err);
   }
-
-  if (response.statusCode !== 200) {
-    console.error('Failed to fetch data. Status code:', response.statusCode);
-    process.exit(1);
-  }
-
-  try {
-    const tasks = JSON.parse(body);
-
-    // Filter out completed tasks
-    const completedTasks = tasks.filter((task) => task.completed);
-
-    // Count completed tasks for each user
-    const completedTasksByUser = completedTasks.reduce((acc, task) => {
-      if (acc[task.userId]) {
-        acc[task.userId]++;
+  let tasks = JSON.parse(body);
+  let obj = {};
+  for (let task of tasks) {
+    if (task.completed === true) {
+      if (obj[task.userId] === undefined) {
+        obj[task.userId] = 1;
       } else {
-        acc[task.userId] = 1;
+        obj[task.userId]++;
       }
-      return acc;
-    }, {});
-
-    console.log(completedTasksByUser);
-  } catch (parseError) {
-    console.error('Error while parsing data:', parseError);
-    process.exit(1);
+    }
   }
+  console.log(obj);
 });
-
